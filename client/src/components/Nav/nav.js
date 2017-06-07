@@ -35,6 +35,7 @@ class Nav extends React.Component {
 
     this.menuButtonClick = this.menuButtonClick.bind(this);
     this.saveButtonClick = this.saveButtonClick.bind(this);
+    this.logoutButtonClick = this.logoutButtonClick.bind(this);
   }
 
   menuButtonClick(ev) {
@@ -46,12 +47,17 @@ class Nav extends React.Component {
 
   saveButtonClick() {
     console.log('CLICKED SAVE BUTTON');
-    // To Do: save codeBoilerPlate render data only. Currently saves the page that is loaded. 
+    var cbp = codeBoilerPlate();
+    console.log(cbp);
+    // To Do: save codeBoilerPlate render data only. Currently saves the page that is loaded.
     // console.log('document:', codeBoilerPlate().props.children.props.children)
     // console.log('document:', document.getElementsByTagName("code")[0].innerText);
     // download(codeBoilerPlate().props.children.props.children, "Material-GUI.html", "text/html"); // does not eval props.code
-    download(document.getElementsByTagName('code')[0].innerText, 'Material-GUI.html', 'text/html');
-    
+    // download(document.getElementsByTagName('code')[0].innerText, 'Material-GUI.html', 'text/html');
+  }
+
+  logoutButtonClick() {
+    console.log('user is logging out!');
   }
 
   render() {
@@ -64,7 +70,8 @@ class Nav extends React.Component {
           <a onClick={this.menuButtonClick} style={styles.contentHeaderMenuLink}><i className="fa fa-times" aria-hidden="true" /></a>}
         <a onClick={this.props.toggleView} style={styles.contentHeaderMenuLink}><i className="fa fa-code" aria-hidden="true" /></a>
         <a onClick={this.saveButtonClick} style={styles.contentHeaderMenuLink}><i className="fa fa-download" aria-hidden="true" /></a>
-        </div>           
+          <a onClick={this.logoutButtonClick} href={"/login"} style={styles.contentHeaderMenuLink}><i className="fa fa-sign-out" aria-hidden="true" /></a>
+        </div>
       </div>);
 
     const sidebarProps = {
