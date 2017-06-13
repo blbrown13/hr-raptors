@@ -95,6 +95,9 @@ class Nav extends React.Component {
 
   loadButtonClick() {
     console.log('loading projects.....');
+    this.setState({
+      projectSelectView: !this.state.projectSelectView,
+    })
     // var projects = ['Project A', 'Project B', 'Project C', 'Project D', 'Project E'];
     // this.setState( {
     //   userProjects: projects,
@@ -157,7 +160,11 @@ class Nav extends React.Component {
             <div style={styles.content}>
               <Route exact path="/" component={View}/>
               <Route path="/code" component={Code}/>
-              < PopoverExampleSimple projects={this.state.userProjects}/>
+              { this.state.projectSelectView ?
+                <div>
+                  < PopoverExampleSimple projects={this.state.userProjects}/>
+                </div> : null
+              }
             </div>
           </Navbar>
         </Router>
