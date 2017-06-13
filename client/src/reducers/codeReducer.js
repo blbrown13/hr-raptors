@@ -10,6 +10,7 @@ export default function reducer(state = {
   saved: false,
   loading: false,
   loaded: false,
+  projects: [],
 }, action) {
 
   switch (action.type) {
@@ -44,7 +45,7 @@ export default function reducer(state = {
     return Object.assign({}, state, {loading: false, error: action.payload});
   }
   case 'LOAD_PROJECTS_FULFILLED': {
-    return Object.assign({}, state, {loading: false, loaded: true});
+    return Object.assign({}, state, {loading: false, loaded: true, projects: action.payload });
   }
 }
 
