@@ -44,6 +44,35 @@ class Nav extends React.Component {
       pullRight: false,
       touchHandleWidth: 20,
       dragToggleDistance: 30,
+      userProjects:
+      [
+        {
+          email: '1234',
+          time_stamp: 'June 12th 2017, 5:20pm',
+          project_name: 'I-abcdefghijklmnopqrs',
+          object: '{}' },
+        {
+          email: '1234',
+          time_stamp: 'June 12th 2017, 5:41pm',
+          project_name: 'L-abcdefghijklmnopqrs',
+          object: '{}' },
+        {
+          email: '1234',
+          time_stamp: 'June 12th 2017, 5:41pm',
+          project_name: 'L-abcdefghijklmnopqrs',
+          object: '{}' },
+        {
+          email: '1234',
+          time_stamp: 'June 12th 2017, 5:42pm',
+          project_name: 'O-abcdefghijklmnopqrs',
+          object: '{}' },
+        {
+          email: '1234',
+          time_stamp: 'June 12th 2017, 5:42pm',
+          project_name: 'V-abcdefghijklmnopqrs',
+          object: '{}' }
+      ],
+      projectSelectView: false,
     };
 
     this.menuButtonClick = this.menuButtonClick.bind(this);
@@ -65,8 +94,11 @@ class Nav extends React.Component {
   }
 
   loadButtonClick() {
-    console.log('current user is:\n', this.props.userData);
     console.log('loading projects.....');
+    // var projects = ['Project A', 'Project B', 'Project C', 'Project D', 'Project E'];
+    // this.setState( {
+    //   userProjects: projects,
+    // });
     this.props.dispatch(loadProjects(this.props.userData.name));
   }
 
@@ -125,7 +157,7 @@ class Nav extends React.Component {
             <div style={styles.content}>
               <Route exact path="/" component={View}/>
               <Route path="/code" component={Code}/>
-              < PopoverExampleSimple />
+              < PopoverExampleSimple projects={this.state.userProjects}/>
             </div>
           </Navbar>
         </Router>

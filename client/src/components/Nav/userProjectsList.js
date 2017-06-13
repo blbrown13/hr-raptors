@@ -34,6 +34,14 @@ class PopoverExampleSimple extends React.Component {
   }
 
   render() {
+
+    let projects =  this.props.projects;
+    let listProjects = projects.map((project, index) =>
+      <div key={index}>
+        <div>{`${project.project_name} | ${project.email} | ${project.time_stamp}`}</div>
+      </div>
+    );
+
     return (
       <div>
         <RaisedButton
@@ -47,12 +55,9 @@ class PopoverExampleSimple extends React.Component {
           targetOrigin={{horizontal: 'left', vertical: 'top'}}
           onRequestClose={this.handleRequestClose}
         >
-          <Menu>
-            <MenuItem primaryText="Refresh" />
-            <MenuItem primaryText="Help &amp; feedback" />
-            <MenuItem primaryText="Settings" />
-            <MenuItem primaryText="Sign out" />
-          </Menu>
+        <div>
+          {listProjects}
+        </div>
         </Popover>
       </div>
     );
@@ -60,3 +65,10 @@ class PopoverExampleSimple extends React.Component {
 }
 
 export default PopoverExampleSimple;
+
+{/*<Menu>*/}
+  {/*<MenuItem primaryText="Refresh" />*/}
+  {/*<MenuItem primaryText="Help &amp; feedback" />*/}
+  {/*<MenuItem primaryText="Settings" />*/}
+  {/*<MenuItem primaryText="Sign out" />*/}
+{/*</Menu>*/}
