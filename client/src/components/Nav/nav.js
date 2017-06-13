@@ -8,10 +8,10 @@ import { saveProject } from "../../actions/codeActions"
 import { loadProjects } from "../../actions/codeActions"
 import { connect } from "react-redux"
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import PopoverExampleSimple from './userProjectsList';
 
 import View from '../View/view';
 import Code from '../Code/code';
+import Projects from '../Projects/projectView';
 
 const styles = {
   contentHeaderMenuLink: {
@@ -44,35 +44,6 @@ class Nav extends React.Component {
       pullRight: false,
       touchHandleWidth: 20,
       dragToggleDistance: 30,
-      userProjects:
-      [
-        {
-          email: '1234',
-          time_stamp: 'June 12th 2017, 5:20pm',
-          project_name: 'I-abcdefghijklmnopqrs',
-          object: '{}' },
-        {
-          email: '1234',
-          time_stamp: 'June 12th 2017, 5:41pm',
-          project_name: 'L-abcdefghijklmnopqrs',
-          object: '{}' },
-        {
-          email: '1234',
-          time_stamp: 'June 12th 2017, 5:41pm',
-          project_name: 'L-abcdefghijklmnopqrs',
-          object: '{}' },
-        {
-          email: '1234',
-          time_stamp: 'June 12th 2017, 5:42pm',
-          project_name: 'O-abcdefghijklmnopqrs',
-          object: '{}' },
-        {
-          email: '1234',
-          time_stamp: 'June 12th 2017, 5:42pm',
-          project_name: 'V-abcdefghijklmnopqrs',
-          object: '{}' }
-      ],
-      projectSelectView: false,
     };
 
     this.menuButtonClick = this.menuButtonClick.bind(this);
@@ -95,13 +66,6 @@ class Nav extends React.Component {
 
   loadButtonClick() {
     console.log('loading projects.....');
-    this.setState({
-      projectSelectView: !this.state.projectSelectView,
-    })
-    // var projects = ['Project A', 'Project B', 'Project C', 'Project D', 'Project E'];
-    // this.setState( {
-    //   userProjects: projects,
-    // });
     this.props.dispatch(loadProjects(this.props.userData.name));
   }
 
@@ -116,7 +80,7 @@ class Nav extends React.Component {
           <Link to="/"><a style={styles.contentHeaderMenuLink}><i className="fa fa-desktop" aria-hidden="true" /></a></Link>
           <Link to="/code"><a style={styles.contentHeaderMenuLink}><i className="fa fa-code" aria-hidden="true" /></a></Link>
           <a onClick={this.saveButtonClick} style={styles.contentHeaderMenuLink}><i className="fa fa-download" aria-hidden="true" /></a>
-          <a onClick={this.loadButtonClick} style={styles.contentHeaderMenuLink}><i className="fa fa-user" aria-hidden="true"/></a>
+          <Link to="/projects"><a onClick={this.loadButtonClick} style={styles.contentHeaderMenuLink}><i className="fa fa-user" aria-hidden="true"/></a></Link>
           <a href={"/login"} style={styles.contentHeaderMenuLink}><i className="fa fa-sign-out" aria-hidden="true" /></a>
         </div>
       </div>);
@@ -160,11 +124,7 @@ class Nav extends React.Component {
             <div style={styles.content}>
               <Route exact path="/" component={View}/>
               <Route path="/code" component={Code}/>
-              { this.state.projectSelectView ?
-                <div>
-                  < PopoverExampleSimple projects={this.state.userProjects}/>
-                </div> : null
-              }
+              <Route path="/projects" component={Projects}/>
             </div>
           </Navbar>
         </Router>
