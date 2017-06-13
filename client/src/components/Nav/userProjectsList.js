@@ -38,7 +38,7 @@ class PopoverExampleSimple extends React.Component {
     let projects =  this.props.projects;
     let listProjects = projects.map((project, index) =>
       <div key={index}>
-        <div>{`${project.project_name} | ${project.email} | ${project.time_stamp}`}</div>
+        <MenuItem primaryText={`${project.project_name} | ${project.email} | ${project.time_stamp}`}/>
       </div>
     );
 
@@ -46,7 +46,7 @@ class PopoverExampleSimple extends React.Component {
       <div>
         <RaisedButton
           onTouchTap={this.handleTouchTap}
-          label="Click me"
+          label="Load Projects"
         />
         <Popover
           open={this.state.open}
@@ -55,9 +55,9 @@ class PopoverExampleSimple extends React.Component {
           targetOrigin={{horizontal: 'left', vertical: 'top'}}
           onRequestClose={this.handleRequestClose}
         >
-        <div>
+        <Menu>
           {listProjects}
-        </div>
+        </Menu>
         </Popover>
       </div>
     );
@@ -66,9 +66,3 @@ class PopoverExampleSimple extends React.Component {
 
 export default PopoverExampleSimple;
 
-{/*<Menu>*/}
-  {/*<MenuItem primaryText="Refresh" />*/}
-  {/*<MenuItem primaryText="Help &amp; feedback" />*/}
-  {/*<MenuItem primaryText="Settings" />*/}
-  {/*<MenuItem primaryText="Sign out" />*/}
-{/*</Menu>*/}
