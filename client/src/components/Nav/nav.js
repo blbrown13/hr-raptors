@@ -8,6 +8,7 @@ import { saveProject } from "../../actions/codeActions"
 import { loadProjects } from "../../actions/codeActions"
 import { connect } from "react-redux"
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import PopoverExampleSimple from './userProjectsList';
 
 import View from '../View/view';
 import Code from '../Code/code';
@@ -124,6 +125,7 @@ class Nav extends React.Component {
             <div style={styles.content}>
               <Route exact path="/" component={View}/>
               <Route path="/code" component={Code}/>
+              < PopoverExampleSimple />
             </div>
           </Navbar>
         </Router>
