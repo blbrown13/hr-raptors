@@ -33,15 +33,18 @@ class ProjectView extends React.Component {
     // var newTree = new Tree(
     //   objectTree
     // )
+
     var someCode = JSON.parse(objectTree);
 
-    Object.prototype.someCode = Tree.traverseRendering;
+    // Object.prototype.someCode = Tree.traverseRendering;
+    // someCode.prototype.constructor = Tree;
 
-    console.log('OBJECT TREE: ', someCode);
-    console.log('TYPE OF TREE', typeof someCode);
+    console.log('OBJECT TREE: ', objectTree);
+    console.log('TYPE OF objectTree', typeof objectTree);
+    console.log('TYPE OF someCode', typeof someCode);
     console.log('AFTER PARSING: ', someCode);
 
-    this.props.dispatch(updateTree(someCode));
+    this.props.dispatch(updateTree(objectTree));
   }
 
   render() {
@@ -53,7 +56,7 @@ class ProjectView extends React.Component {
         <div className="row">
           {
             _.map(projects, (project, index) =>
-              <div className="col s4" key={index}>
+              <div className="col s4" id="project-card" key={index}>
                 <Card>
                   <CardTitle title={project.project_name} subtitle={project.time_stamp} />
                   <CardText>
