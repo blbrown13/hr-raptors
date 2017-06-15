@@ -21,31 +21,67 @@ class ProjectView extends React.Component {
 
   constructor(props) {
     super(props);
-    console.log('THIS.PROPS.PROJECTDATA*************************');
-    console.log(this.props.projectData);
-    console.log(Array.isArray((this.props.projectData)));
-    console.log('PROJECTS: ', this.props.projects);
+    this.state = { projectData: [] }
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(objectTree) {
 
-    // var newTree = new Tree(
-    //   objectTree
-    // )
-    var someCode = JSON.parse(objectTree);
 
-    Object.prototype.someCode = Tree.traverseRendering;
+  componentWillReceiveProps(nextProps) {
+    console.log('@@@ inside componentWillReceiveProps')
+    console.log('this.props.projectData: ', this.props.projectData);
+    console.log('nextprops projectdata: ', nextProps.projectData)
+    console.log('STATE!!', this.state.projectData);
 
-    console.log('OBJECT TREE: ', someCode);
-    console.log('TYPE OF TREE', typeof someCode);
-    console.log('AFTER PARSING: ', someCode);
+    if(nextProps.projectData !== this.props.projectData) {
+      console.log('@@@ inside IF nextProps.projectData !== this.props.projectData');
+      this.setState({projectData: nextProps.projectData }, ()=> {
+        console.log('STATE!!', this.state.projectData);
+        var PD = this.state.projectData;
+        PD.forEach((proj,idx) => {
+          console.log(`project #${idx+1}: `, proj);
+          console.log('project code: ', proj.object);
+        });
+      });
+    }
+  }
 
-    this.props.dispatch(updateTree(someCode));
+  addPrototypesToTree(tempTree) {
+    console.log('I AM ROOOOOOOOOOOOOOOOOT: ', tempTree['_root']);
+
+    var rootComponent = tempTree['_root'].component;
+    var rowObject =  {
+        linkedList: {},
+        head: null,
+        tail: null,
+        renderLinkedList: [],
+    };
+
+    // tree['_root'].ID =  " "
+    // tree['_root'].children[0].parentID
+
+    var oldRootChildren = tempTree['_root'].children;
+    console.log('CHILDREN FOR ADDING!!! ', oldRootChildren);
+
+    // function Node(component, rowObject, isRow)
+    var newRootTree = new Tree(rootComponent, rowObject, false);
+    newRootTree['_root'].children = oldRootChildren;
+    newRootTree['_root'].ID = tempTree['_root'].children[0].parentID;
+    console.log('NEW ROOT TREE: ', newRootTree);
+
+    console.log('returning tree****************')
+    return newRootTree;
+  }
+
+  handleClick(treeString) {
+    var treeObject = JSON.parse(treeString);
+    var selectedTree = this.addPrototypesToTree(treeObject);
+    console.log('dispatching tree********************')
+    this.props.dispatch(updateTree(selectedTree));
   }
 
   render() {
-    var projects = this.props.projectData;
+    var projects = this.state.projectData;
 
     return (
       <div className="center-content">
